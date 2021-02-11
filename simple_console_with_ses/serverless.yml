@@ -1,0 +1,30 @@
+service: app
+
+provider:
+    name: aws
+    region: us-east-2
+    runtime: provided.al2
+    iamRoleStatements:
+        - Effect: 'Allow'
+          Resource: '*'
+          Action:
+            - "ses:*"
+
+plugins:
+    - ./vendor/bref/bref
+
+functions:
+    hello:
+        handler: 'index.php'
+        description: ''
+        timeout: 60
+        layers:
+            - ${bref:layer.php-74}
+            - ${bref:layer.console}
+        
+
+# Exclude files from deployment
+package:
+    exclude:
+        - 'tests/**'
+        - '.env.example'

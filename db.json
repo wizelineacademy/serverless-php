@@ -1,0 +1,19 @@
+{
+    "users": [
+        {
+            "name": "Jakob",
+            "lastName": "Hans",
+            "age": 35
+        },
+        {
+            "name": "Roberto Leroy",
+            "lastName": "Monroy Ruiz",
+            "age": 31
+        },
+        {
+            "name": "Lorena",
+            "lastName": "Ortiz Vazquez",
+            "age": 20
+        }
+    ]
+}

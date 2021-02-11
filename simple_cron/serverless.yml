@@ -1,0 +1,26 @@
+service: app
+
+provider:
+    name: aws
+    region: us-east-2
+    runtime: provided.al2
+
+plugins:
+    - ./vendor/bref/bref
+
+functions:
+    cron:
+        handler: index.php
+        description: ''
+        layers:
+            - ${bref:layer.php-74}
+            - ${bref:layer.console}
+        events:
+            - schedule:
+                rate: rate(1 minute)
+                input: '"consume:rest"'
+
+# Exclude files from deployment
+package:
+    exclude:
+        - 'tests/**'
