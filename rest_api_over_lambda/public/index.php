@@ -15,8 +15,14 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 // Define app routes
 $app->get('/hello/{name}', function (Request $request, Response $response, $args) {
     $name = $args['name'];
-    $response->getBody()->write("Hello, $name");
-    return $response;
+    $payload = json_encode([
+        "message"=> "the endpoint was executed",
+        "name"=> $name
+    ]);
+    $response->getBody()->write($payload);
+    return $response
+          ->withHeader('Content-Type', 'application/json')
+          ->withStatus(201);
 });
 
 // Run app
